@@ -3,10 +3,20 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Product;
 use Illuminate\Database\Seeder;
+use Illuminate\Foundation\Testing\WithFaker;
 
 class DatabaseSeeder extends Seeder
 {
+    use WithFaker;
+
+    public function __construct()
+    {
+        $this->setUpFaker();
+    }
+
     /**
      * Seed the application's database.
      *
@@ -14,11 +24,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $products = Product::factory(5)->slug()->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $products->each(function ($product) {
+            $imageUrl = $this->faker->imageUrl();
+
+            $product->addMediaFromUrl($imageUrl)->toMediaCollection();
+        });
     }
 }

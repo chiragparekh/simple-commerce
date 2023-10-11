@@ -15,7 +15,7 @@ class Category extends Model implements HasMedia
     use HasFactory, InteractsWithMedia, HasUuids;
 
     protected $fillable = [
-        'name', 'slug', 'description', 'short_description'
+        'name', 'slug', 'description', 'short_description', 'sort_order'
     ];
 
     public function registerMediaConversions(Media $media = null): void

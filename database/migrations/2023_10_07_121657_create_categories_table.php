@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('slug')->index();
             $table->text('description');
             $table->text('short_description');
+            $table->unsignedSmallInteger('sort_order')->default(1);
             $table->timestamps();
         });
     }
